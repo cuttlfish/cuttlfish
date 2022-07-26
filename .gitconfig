@@ -1,0 +1,69 @@
+[user]
+    name = David Liu
+    email = dliu@broadcom.com
+[merge]
+        #tool = c:/Program Files/WinMerge/WinMergeU.exe
+[diff]
+        guitool = kdiff3
+[gui]
+        recentrepo = //bseswt1a/dliu/trellis/test
+[color]
+        ui = auto
+[core]
+    #   autocrlf = true
+        filemode = false
+            whitespace = trailing-space,space-before-tab
+    deltaBaseCacheLimit = 1G
+	sshCommand = ssh -i ~/.ssh/id_rsa1
+[i18n]
+        filesEncoding = utf-8
+[difftool "WinMerge"]
+        path = C:/Program Files/WinMerge/WinMergeU.exe
+            cmd = 'C:/Program Files/WinMerge/WinMergeU.exe' /e /x /u $LOCAL $REMOTE
+[mergetool "WinMerge"]
+        path = C:/Program Files/WinMerge/WinMergeU.exe
+            cmd = 'C:/Program Files/WinMerge/WinMergeU.exe' /e /x /u $LOCAL $REMOTE $MERGED
+[alias]
+    ci = commit
+    s = "status"
+                # [l = log] short one line logs with ref-names
+    l  = log --graph
+    b = "branch"
+    g = "!git gui &"
+    unadd = rm -r --cached
+    l2 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
+    gl = log --oneline --decorate --stat --graph
+                                            # [r = remote] listing remotes with urls
+    r  = remote -v
+                                                    # [dfb = diff before pull]
+    dfb = diff ORIG_HEAD HEAD
+    sf = submodule foreach
+    co = checkout
+    cpk = cherry-pick
+    showfile = show --pretty="format:" --name-only
+	st = status -uno
+    store = stash
+    adog = log --all --decorate --oneline --graph
+    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ai)%C(reset) %C(auto)%s%C(reset) %C(blue)- %an%C(reset)%C(bold red)%d%C(reset)' 
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ai)%C(reset) %C(auto)%s%C(reset) %C(blue)'
+    lg3 = log --graph --abbrev-commit --decorate --format=format:'%C(auto)%s%C(reset) %C(blue)'
+    lg4 = log --graph --abbrev-commit --decorate --no-notes --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --exclude=refs/notes/baseline/commits 
+    lg = !"git lg1"
+	lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
+    vv = branch -vv
+
+#[credential]
+    #helper = cache
+#[http]
+    #cookiefile = /home/dliu/.gitcookies
+[url "ssh://stb-sj1-ub2.sj.broadcom.com/opt/repos/google-avko"]
+       insteadof = ssh://gitrmna@git.ric.broadcom.com/bcg/mirrors/google-avko
+
+[url "https://github.com"]
+	insteadOf = "git://github.com"
+
+[url "https://yoctoproject.org"]
+	insteadOf = "git://yoctoproject.com"
+
+[url "https://david.liu:f!96DKxWF@code.rdkcentral.com"]
+	insteadOf = "https://code.rdkcentral.com"
